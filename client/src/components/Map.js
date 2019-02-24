@@ -8,46 +8,19 @@ import { google } from '../lib';
 import { pxPerMeter } from '../utils';
 
 export default class Map extends Component {
-  static defaultProps = {
-    defaultCenter: {
-      lat: 37.787484,
-      lng: -122.396397,
-    },
-    defaultZoom: 15,
-  };
-
-  state = {
-    pxPerMeter: pxPerMeter(
-      this.props.defaultCenter.lat,
-      this.props.defaultZoom
-    ),
-    zoom: this.props.defaultZoom,
-  };
-
-  onChange = ({ center, zoom, bounds, marginBounds }) => {
-    const { lat } = center;
-    this.setState(() => ({
-      pxPerMeter: pxPerMeter({ lat, zoom }),
-      zoom,
-    }));
-  };
-
   render() {
     return (
       <GridChild relative gridArea="map">
-        <MapContext.Provider value={{ ...this.props, ...this.state }}>
-          <GoogleMapReact
-            bootstrapURLKeys={{ key: google.API_KEY }}
-            defaultCenter={this.props.defaultCenter}
-            defaultZoom={this.props.defaultZoom}
-            zoom={this.state.zoom}
-            resetBoundsOnResize={true}
-            scaleControl={true}
-            onChange={this.onChange}
-          >
-            <Area />
-          </GoogleMapReact>
-        </MapContext.Provider>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: google.API_KEY }}
+          defaultCenter={this.props.defaultCenter}
+          defaultZoom={this.props.defaultZoom}
+          resetBoundsOnResize={true}
+          scaleControl={true}
+          onChange={this.props.onChange}
+        >
+          <Area />
+        </GoogleMapReact>
       </GridChild>
     );
   }
