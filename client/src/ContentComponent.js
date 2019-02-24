@@ -4,21 +4,15 @@ import './ContentComponent.css';
 const uuidv4 = require('uuid/v4');
 
 class ContentComponent extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {};
-  // }
-
   render() {
     const {
-      id,
       title,
       description,
       location,
       comments,
       pictures,
       votes
-    } = this.props;
+    } = this.props.fence;
 
     const pics = pictures.map(pic => {
       return (
@@ -101,31 +95,6 @@ class ContentComponent extends Component {
     ],
     votes: 0
   };
-
-  /*
-  {
-    fences: {
-        inside: [{
-            id: string
-            title: string
-            description: string
-            location: string
-            comments: [string]
-            pictures: [string]
-            votes: interger
-        }],
-        outside: [{
-            id: string
-            title: string
-            description: string
-            location: string
-            comments: [string]
-            pictures: [string]
-            votes: interger
-        }]
-    }
-}
-  */
 }
 
 export default ContentComponent;
