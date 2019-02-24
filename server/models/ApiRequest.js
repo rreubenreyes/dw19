@@ -15,6 +15,24 @@ class APIRequest {
 			return next(error);
 		}
 	}
+
+	static async addProject(name) {
+		try {
+			const apiResult = await axios({
+				url: `${API_BASE}/projects/project?key=${API_KEY}&adminKey=${ADMIN_KEY}`,
+				method: 'post',
+				data: {
+					name,
+				},
+			});
+			return apiResult.data;
+		} catch (error) {
+			console.log(error.response.data.message);
+			return next(error);
+		}
+	}
+
+	static async getProject(projectId) {}
 }
 
 module.exports = APIRequest;
