@@ -1,33 +1,28 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+<<<<<<< HEAD
 import GoogleMapReact from 'google-map-react';
 import ContentComponent from './ContentComponent';
 import 'materialize-css/dist/css/materialize.min.css';
 import './App.css';
+=======
+>>>>>>> c37bfd0e5081674d4ab18ef211238a9e6bafa27f
 
-import { google } from './lib';
-import { pxPerMeter, zoom } from './utils';
+import MapContext from './context/map-context';
+import Header from './components/Header';
+import Map from './components/Map';
+import Sidebar from './components/Sidebar';
+import { pxPerMeter } from './utils';
 
-const Circle = styled.div`
-  position: relative;
-  height: ${props => `${props.radius * props.pxPerMeter}px`};
-  width: ${props => `${props.radius * props.pxPerMeter}px`};
-  border-radius: 50%;
-  background-color: rgba(255, 0, 0, 0.25);
-
-  :after {
-    cursor: default;
-    position: absolute;
-    top: -25%;
-    left: 50%;
-    font-size: 20px;
-display: flex;
-    background-color: white;
-    content: '${props => props.locationName}';
-  }
+const GridWrapper = styled.div`
+  display: grid;
+  grid-template: 10vh 90vh / 80vw 20vw;
+  grid-template-areas:
+    'header header'
+    'map sidebar';
 `;
 
-class App extends Component {
+export default class App extends Component {
   static defaultProps = {
     defaultCenter: {
       lat: 37.787484,
@@ -36,6 +31,7 @@ class App extends Component {
     defaultZoom: 15
   };
 
+<<<<<<< HEAD
   state = {
     meters: pxPerMeter(this.props.defaultCenter.lat, this.props.defaultZoom),
     zoom: this.props.defaultZoom
@@ -46,11 +42,34 @@ class App extends Component {
     this.setState(() => ({
       meters: pxPerMeter({ lat, zoom }),
       zoom
+=======
+  handleChange = ({ center, zoom, bounds, marginBounds }) => {
+    const { lat } = center;
+    this.setState(() => ({
+      pxPerMeter: pxPerMeter({ lat, zoom }),
+      zoom,
+>>>>>>> c37bfd0e5081674d4ab18ef211238a9e6bafa27f
     }));
+  };
+
+  handleActiveFence = fence => {
+    this.setState(() => ({
+      activeFence: fence,
+    }));
+  };
+
+  state = {
+    activeFence: null,
+    pxPerMeter: pxPerMeter(
+      this.props.defaultCenter.lat,
+      this.props.defaultZoom
+    ),
+    zoom: this.props.defaultZoom,
   };
 
   render() {
     return (
+<<<<<<< HEAD
       <div style={{ height: '100vh', width: '100%' }}>
         <ContentComponent />
         <GoogleMapReact
@@ -75,29 +94,21 @@ class App extends Component {
             lng={-122.405183}
             pxPerMeter={this.state.meters}
             radius={100}
+=======
+      <GridWrapper>
+        <MapContext.Provider value={{ ...this.props, ...this.state }}>
+          <Header />
+          <Sidebar />
+          <Map
+            {...this.props}
+            setActiveFence={this.handleActiveFence}
+            onChange={this.handleChange}
+>>>>>>> c37bfd0e5081674d4ab18ef211238a9e6bafa27f
             zoom={this.state.zoom}
-            locationName="Museum of Ice Cream"
+            pxPerMeter={this.state.pxPerMeter}
           />
-          <Circle
-            lat={37.795449}
-            lng={-122.393618}
-            pxPerMeter={this.state.meters}
-            radius={100}
-            zoom={this.state.zoom}
-            locationName="Ferry Building"
-          />
-          <Circle
-            lat={37.787246}
-            lng={-122.400103}
-            pxPerMeter={this.state.meters}
-            radius={100}
-            zoom={this.state.zoom}
-            locationName="The Bird"
-          />
-        </GoogleMapReact>
-      </div>
+        </MapContext.Provider>
+      </GridWrapper>
     );
   }
 }
-
-export default App;
