@@ -16,6 +16,21 @@ export const sampleData = {
         ],
         votes: 10,
       },
+      {
+        id: 1,
+        title: 'Ferry Building',
+        description: 'this is the ferry building',
+        location: {
+          lat: 37.795449,
+          lng: -122.393618,
+          radius: 400,
+        },
+        comments: [
+          { id: 0, value: 'this is a comment' },
+          { id: 1, value: 'second comment' },
+        ],
+        votes: 10,
+      },
     ],
     outside: [
       {
