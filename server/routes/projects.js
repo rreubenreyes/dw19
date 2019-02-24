@@ -76,12 +76,8 @@ router.put('/:projectId', async (req, res, next) => {
 router.delete('/:projectId', async (req, res, next) => {
 	try {
 		const { projectId } = req.params;
-		const apiResult = await axios({
-			url: `${API_BASE}/projects/${projectId}?key=${API_KEY}&adminKey=${ADMIN_KEY}&dryRun=false`,
-			method: 'delete',
-		});
-
-		return res.json(apiResult.data);
+		const apiResponse = await APIRequest.deleteProject(projectId);
+		return res.json(apiResponse);
 	} catch (error) {
 		return next(error);
 	}

@@ -81,6 +81,19 @@ class APIRequest {
 			throw error;
 		}
 	}
+
+	static async deleteProject(projectId) {
+		try {
+			const apiResult = await axios({
+				url: `${API_BASE}/projects/${projectId}?key=${API_KEY}&adminKey=${ADMIN_KEY}&dryRun=false`,
+				method: 'delete',
+			});
+			return apiResult.data;
+		} catch (error) {
+			console.log(error.response.data.message);
+			throw error;
+		}
+	}
 }
 
 module.exports = APIRequest;
