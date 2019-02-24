@@ -13,17 +13,17 @@ require('dotenv').config();
 // }
 
 const SECRET_KEY = process.env.SECRET_KEY;
-const SERVER_PORT = process.env.PORT || 3000;
+const SERVER_PORT = process.env.PORT || 3001;
 const API_BASE = 'https://api.tomtom.com/geofencing/1';
 const ADMIN_KEY = process.env.ADMIN_KEY;
 const API_KEY = process.env.API_KEY;
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY || '';
 
 module.exports = {
-  SECRET_KEY,
-  SERVER_PORT,
-  API_BASE,
-  ADMIN_KEY,
-  API_KEY,
-  GOOGLE_API_KEY
+	SECRET_KEY,
+	SERVER_PORT,
+	API_BASE,
+	ADMIN_KEY,
+	API_KEY,
+	GOOGLE_API_KEY,
 };
