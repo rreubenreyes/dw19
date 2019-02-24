@@ -34,8 +34,8 @@ export default class Map extends Component {
 
   render() {
     return (
-      <MapContext.Provider value={{ ...this.props, ...this.state }}>
-        <GridChild gridArea="map">
+      <GridChild relative gridArea="map">
+        <MapContext.Provider value={{ ...this.props, ...this.state }}>
           <GoogleMapReact
             bootstrapURLKeys={{ key: google.API_KEY }}
             defaultCenter={this.props.defaultCenter}
@@ -47,8 +47,8 @@ export default class Map extends Component {
           >
             <Area />
           </GoogleMapReact>
-        </GridChild>
-      </MapContext.Provider>
+        </MapContext.Provider>
+      </GridChild>
     );
   }
 }

@@ -26,22 +26,20 @@ export default class Area extends Component {
   render() {
     const insideFences = sampleData.fences.inside;
 
-    return (
+    return insideFences.map(() => (
       <MapContext.Consumer>
-        {({ pxPerMeter: ppm, zoom }) =>
-          insideFences.map(() => (
-            <Circle
-              key="adfj21"
-              lat={37.787484}
-              lng={-122.396397}
-              pxPerMeter={ppm}
-              radius={100}
-              zoom={zoom}
-              locationName="Galvanize (100m)"
-            />
-          ))
-        }
+        {({ pxPerMeter: ppm, zoom }) => (
+          <Circle
+            key="adfj21"
+            lat={37.787484}
+            lng={-122.396397}
+            pxPerMeter={ppm}
+            radius={100}
+            zoom={zoom}
+            locationName="Galvanize (100m)"
+          />
+        )}
       </MapContext.Consumer>
-    );
+    ));
   }
 }
