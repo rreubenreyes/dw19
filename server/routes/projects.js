@@ -16,6 +16,7 @@ const { API_BASE, ADMIN_KEY, API_KEY } = require('../config');
 router.get('/', async (req, res, next) => {
 	try {
 		const apiResult = await APIRequest.getProjects();
+
 		return res.json(apiResult);
 	} catch (error) {
 		return next(error);
@@ -30,7 +31,9 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
 	try {
 		const { name } = req.body;
+
 		const apiResponse = await APIRequest.addProject(name);
+
 		return res.json(apiResponse);
 	} catch (error) {
 		return next(error);
@@ -45,7 +48,9 @@ router.post('/', async (req, res, next) => {
 router.get('/:projectId', async (req, res, next) => {
 	try {
 		const { projectId } = req.params;
+
 		const apiResponse = await APIRequest.getProject(projectId);
+
 		return res.json(apiResponse);
 	} catch (error) {
 		return next(error);
@@ -61,7 +66,9 @@ router.put('/:projectId', async (req, res, next) => {
 	try {
 		const { projectId } = req.params;
 		const { name } = req.body;
+
 		const apiResponse = await APIRequest.updateProjectName(projectId, name);
+
 		return res.json(apiResponse);
 	} catch (error) {
 		return next(error);
@@ -76,7 +83,9 @@ router.put('/:projectId', async (req, res, next) => {
 router.delete('/:projectId', async (req, res, next) => {
 	try {
 		const { projectId } = req.params;
+
 		const apiResponse = await APIRequest.deleteProject(projectId);
+
 		return res.json(apiResponse);
 	} catch (error) {
 		return next(error);
@@ -113,10 +122,12 @@ router.post('/:projectId/fence', async (req, res, next) => {
 	try {
 		const { projectId } = req.params;
 		const data = req.body;
+
 		const apiResponse = await APIRequest.addGeoFenceToProject(
 			projectId,
 			data
 		);
+
 		return res.json(apiResponse);
 	} catch (error) {
 		return next(error);
@@ -136,23 +147,14 @@ router.post('/:projectId/report', async (req, res, next) => {
 		const { projectId } = req.params;
 		const { longitude, latitude, range } = req.body;
 
-		const apiResult = await axios({
-			url: `${API_BASE}/report/${projectId}?key=${API_KEY}&point=${longitude},${latitude}&range=${range ||
-				100}`,
-			method: 'get',
+		const apiResponse = await APIRequest.getFenceReport(projectId, {
+			longitude,
+			latitude,
+			range,
 		});
 
-		const inside = formatFenceData(apiResult.data.inside.features);
-		const outside = formatFenceData(apiResult.data.outside.features);
-
-		return res.json({
-			fences: {
-				inside,
-				outside,
-			},
-		});
+		return res.json(apiResponse);
 	} catch (error) {
-		console.log(error.response.data.message);
 		return next(error);
 	}
 });

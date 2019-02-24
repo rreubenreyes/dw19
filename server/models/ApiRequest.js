@@ -1,4 +1,5 @@
 const axios = require('axios');
+const formatFenceData = require('../helpers/formatFenceData');
 
 const { API_BASE, ADMIN_KEY, API_KEY } = require('../config');
 
@@ -103,6 +104,29 @@ class APIRequest {
 				data,
 			});
 			return apiResult.data;
+		} catch (error) {
+			console.log(error.response.data.message);
+			throw error;
+		}
+	}
+
+	static async getFenceReport(projectId, { longitude, latitude, range }) {
+		try {
+			const apiResult = await axios({
+				url: `${API_BASE}/report/${projectId}?key=${API_KEY}&point=${longitude},${latitude}&range=${range ||
+					100}`,
+				method: 'get',
+			});
+
+			const inside = formatFenceData(apiResult.data.inside.features);
+			const outside = formatFenceData(apiResult.data.outside.features);
+
+			return {
+				fences: {
+					inside,
+					outside,
+				},
+			};
 		} catch (error) {
 			console.log(error.response.data.message);
 			throw error;
