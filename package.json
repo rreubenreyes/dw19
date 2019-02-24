@@ -10,7 +10,8 @@
     "build": "concurrently \"cd client && npm run build\" \"cd server && npm run build\"",
     "install": "(cd client && npm) && (cd server && npm)",
     "start": "concurrently \"cd client && PORT=3000 npm start\" \"cd server && PORT=3001 npm start\"",
-    "start:prod": "cd server && npm start:prod"
+    "start:prod": "cd server && npm start:prod",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,8 @@
   "homepage": "https://github.com/rreubenreyes/dw19#readme",
   "dependencies": {
     "concurrently": "^4.1.0"
+  },
+  "engines": {
+    "node": "10.14.1"
   }
 }
