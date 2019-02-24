@@ -94,6 +94,20 @@ class APIRequest {
 			throw error;
 		}
 	}
+
+	static async addGeoFenceToProject(projectId, data) {
+		try {
+			const apiResult = await axios({
+				url: `${API_BASE}/projects/${projectId}/fence?key=${API_KEY}&adminKey=${ADMIN_KEY}`,
+				method: 'post',
+				data,
+			});
+			return apiResult.data;
+		} catch (error) {
+			console.log(error.response.data.message);
+			throw error;
+		}
+	}
 }
 
 module.exports = APIRequest;

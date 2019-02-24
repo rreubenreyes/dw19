@@ -113,16 +113,12 @@ router.post('/:projectId/fence', async (req, res, next) => {
 	try {
 		const { projectId } = req.params;
 		const data = req.body;
-
-		const apiResult = await axios({
-			url: `${API_BASE}/projects/${projectId}/fence?key=${API_KEY}&adminKey=${ADMIN_KEY}`,
-			method: 'post',
-			data,
-		});
-
-		return res.json(apiResult.data);
+		const apiResponse = await APIRequest.addGeoFenceToProject(
+			projectId,
+			data
+		);
+		return res.json(apiResponse);
 	} catch (error) {
-		console.log(error.response.data.message);
 		return next(error);
 	}
 });
