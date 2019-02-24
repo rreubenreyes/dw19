@@ -27,7 +27,8 @@ app.use(express.urlencoded({ extended: true }));
 var projectRoutes = require('./routes/projects');
 
 // serer static react files
-var staticFiles = express.static(path.join(__dirname, '../../client/build'));
+var staticFiles = express.static(path.join(__dirname, '../client/build'));
+console.log(staticFiles);
 app.use(staticFiles);
 
 // routing Control
