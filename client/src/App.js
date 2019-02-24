@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import GoogleMapReact from 'google-map-react';
 import ContentComponent from './ContentComponent';
+import 'materialize-css/dist/css/materialize.min.css';
 import './App.css';
 
 import { google } from './lib';
