@@ -27,15 +27,9 @@ export default class Area extends Component {
     const insideFences = sampleData.fences.inside;
 
     return insideFences.map(() => (
-      <MapContext.Consumer>
-        {({ pxPerMeter: ppm, zoom }) => (
-          <div
-            style={{
-              position: 'absolute',
-              left: `${ppm}px`,
-              top: `${ppm}px`,
-            }}
-          >
+      <div>
+        <MapContext.Consumer>
+          {({ pxPerMeter: ppm, zoom }) => (
             <Circle
               key="adfj21"
               lat={37.787484}
@@ -45,9 +39,9 @@ export default class Area extends Component {
               zoom={zoom}
               locationName="Galvanize (100m)"
             />
-          </div>
-        )}
-      </MapContext.Consumer>
+          )}
+        </MapContext.Consumer>
+      </div>
     ));
   }
 }

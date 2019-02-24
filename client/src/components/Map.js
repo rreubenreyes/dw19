@@ -1,14 +1,32 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import styled from 'styled-components';
 
-import MapContext from '../context/map-context';
 import GridChild from './common/GridChild';
-import Area from './Area';
+import { sampleData } from '../data';
 import { google } from '../lib';
-import { pxPerMeter } from '../utils';
+
+const Circle = styled.div`
+  position: relative;
+  height: ${props => `${props.radius * props.pxPerMeter}px`};
+  width: ${props => `${props.radius * props.pxPerMeter}px`};
+  border-radius: 50%;
+  background-color: rgba(255, 0, 0, 0.25);
+
+  :after {
+    cursor: default;
+    position: absolute;
+top: 50%
+    left: 50%;
+    font-size: 20px;
+    background-color: white;
+    content: '${props => props.locationName}';
+  }
+`;
 
 export default class Map extends Component {
   render() {
+    const insideFences = sampleData.fences.inside;
     return (
       <GridChild relative gridArea="map">
         <GoogleMapReact
@@ -19,7 +37,27 @@ export default class Map extends Component {
           scaleControl={true}
           onChange={this.props.onChange}
         >
-          <Area />
+          {insideFences.map(fence => {
+            const {
+              id,
+              location: { lat, lng, radius },
+              title,
+            } = fence;
+            return (
+              <Circle
+                key={id}
+                lat={lat}
+                lng={lng}
+                locationName={title}
+                onClick={() => {
+                  this.props.setActiveFence(fence);
+                }}
+                pxPerMeter={this.props.pxPerMeter}
+                radius={radius}
+                zoom={this.props.zoom}
+              />
+            );
+          })}
         </GoogleMapReact>
       </GridChild>
     );

@@ -24,7 +24,7 @@ export default class App extends Component {
     defaultZoom: 15,
   };
 
-  onChange = ({ center, zoom, bounds, marginBounds }) => {
+  handleChange = ({ center, zoom, bounds, marginBounds }) => {
     const { lat } = center;
     this.setState(() => ({
       pxPerMeter: pxPerMeter({ lat, zoom }),
@@ -32,7 +32,14 @@ export default class App extends Component {
     }));
   };
 
+  handleActiveFence = fence => {
+    this.setState(() => ({
+      activeFence: fence,
+    }));
+  };
+
   state = {
+    activeFence: null,
     pxPerMeter: pxPerMeter(
       this.props.defaultCenter.lat,
       this.props.defaultZoom
@@ -48,8 +55,10 @@ export default class App extends Component {
           <Sidebar />
           <Map
             {...this.props}
-            onChange={this.onChange}
+            setActiveFence={this.handleActiveFence}
+            onChange={this.handleChange}
             zoom={this.state.zoom}
+            pxPerMeter={this.state.pxPerMeter}
           />
         </MapContext.Provider>
       </GridWrapper>
