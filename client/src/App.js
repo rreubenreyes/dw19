@@ -1,25 +1,61 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import styled from 'styled-components';
+import GoogleMapReact from 'google-map-react';
 import './App.css';
 
+import { google } from './lib';
+import { pxPerMeter, zoom } from './utils';
+
+const Circle = styled.div`
+  height: ${props => `${props.radius * props.pxPerMeter}px`};
+  width: ${props => `${props.radius * props.pxPerMeter}px`};
+  border-radius: 50%;
+  background-color: rgba(255, 0, 0, 0.25);
+`;
+
 class App extends Component {
+  static defaultProps = {
+    defaultCenter: {
+      lat: 59.95,
+      lng: 30.33,
+    },
+    defaultZoom: 11,
+  };
+
+  state = {
+    meters: pxPerMeter(this.props.defaultCenter.lat, this.props.defaultZoom),
+    zoom: this.props.defaultZoom,
+  };
+
+  onChange = ({ center, zoom, bounds, marginBounds }) => {
+    const { lat } = center;
+    this.setState(() => ({
+      meters: pxPerMeter({ lat, zoom }),
+      zoom,
+    }));
+  };
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div style={{ height: '100vh', width: '100%' }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: google.API_KEY }}
+          defaultCenter={this.props.defaultCenter}
+          defaultZoom={this.props.defaultZoom}
+          zoom={this.state.zoom}
+          resetBoundsOnResize={true}
+          scaleControl={true}
+          onChange={this.onChange}
+        >
+          <Circle
+            lat={59.955413}
+            lng={30.337844}
+            pxPerMeter={this.state.meters}
+            radius={100}
+            zoom={this.state.zoom}
+            text={'Kreyser Avrora'}
+          />
+        </GoogleMapReact>
       </div>
     );
   }
