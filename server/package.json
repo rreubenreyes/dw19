@@ -4,18 +4,26 @@
   "description": "API Backend Application",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon -r babel-register server.js",
+    "start:prod": "node build/server.js",
     "test": "jest -i",
-    "start": "node server.js"
+    "build": "babel . --ignore node_modules,build --out-dir build"
   },
   "author": "wongco",
   "license": "ISC",
   "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-register": "^6.26.0",
     "jest": "23.6.0",
     "morgan": "^1.9.1",
+    "nodemon": "^1.18.10",
     "supertest": "3.3.0"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",

@@ -16,7 +16,7 @@ const { API_BASE, ADMIN_KEY, API_KEY } = require('../config');
 router.get('/', async (req, res, next) => {
 	try {
 		const apiResult = await APIRequest.getProjects();
-
+        console.log(apiResult);
 		return res.json(apiResult);
 	} catch (error) {
 		return next(error);

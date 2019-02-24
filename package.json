@@ -1,0 +1,31 @@
+{ "name": "dw19",
+  "version": "1.0.0",
+  "description": "Developer Week 2019 Hackathon",
+  "main": "index.js",
+  "scripts": {
+    "install": "(cd client && npm install) && (cd server && npm install)",
+    "start": "concurrently \"cd client && PORT=3000 npm start\" \"cd server && PORT=3001 npm start\"",
+    "start:prod": "cd server && npm run start:prod",
+    "build": "concurrently \"cd client && PORT=3000 npm run build\" \"cd server && PORT=3001 npm run uuild\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "10.15.1"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rreubenreyes/dw19.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rreubenreyes/dw19/issues"
+  },
+  "homepage": "https://github.com/rreubenreyes/dw19#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
