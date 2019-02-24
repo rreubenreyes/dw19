@@ -29,15 +29,23 @@ export default class Area extends Component {
     return insideFences.map(() => (
       <MapContext.Consumer>
         {({ pxPerMeter: ppm, zoom }) => (
-          <Circle
-            key="adfj21"
-            lat={37.787484}
-            lng={-122.396397}
-            pxPerMeter={ppm}
-            radius={100}
-            zoom={zoom}
-            locationName="Galvanize (100m)"
-          />
+          <div
+            style={{
+              position: 'absolute',
+              left: `${ppm}px`,
+              top: `${ppm}px`,
+            }}
+          >
+            <Circle
+              key="adfj21"
+              lat={37.787484}
+              lng={-122.396397}
+              pxPerMeter={ppm}
+              radius={100}
+              zoom={zoom}
+              locationName="Galvanize (100m)"
+            />
+          </div>
         )}
       </MapContext.Consumer>
     ));
