@@ -18,19 +18,20 @@ const Circle = styled.div`
     position: absolute;
     top: -25%;
     left: 50%;
-    font-size: 30px;
+    font-size: 20px;
+display: flex;
     background-color: white;
-    content: 'Geofence Here!!!!';
+    content: '${props => props.locationName}';
   }
 `;
 
 class App extends Component {
   static defaultProps = {
     defaultCenter: {
-      lat: 59.95,
-      lng: 30.33,
+      lat: 37.787484,
+      lng: -122.396397,
     },
-    defaultZoom: 11,
+    defaultZoom: 15,
   };
 
   state = {
@@ -59,12 +60,36 @@ class App extends Component {
           onChange={this.onChange}
         >
           <Circle
-            lat={59.955413}
-            lng={30.337844}
+            lat={37.787484}
+            lng={-122.396397}
             pxPerMeter={this.state.meters}
             radius={100}
             zoom={this.state.zoom}
-            text={'Kreyser Avrora'}
+            locationName="Galvanize"
+          />
+          <Circle
+            lat={37.786996}
+            lng={-122.405183}
+            pxPerMeter={this.state.meters}
+            radius={100}
+            zoom={this.state.zoom}
+            locationName="Museum of Ice Cream"
+          />
+          <Circle
+            lat={37.795449}
+            lng={-122.393618}
+            pxPerMeter={this.state.meters}
+            radius={100}
+            zoom={this.state.zoom}
+            locationName="Ferry Building"
+          />
+          <Circle
+            lat={37.787246}
+            lng={-122.400103}
+            pxPerMeter={this.state.meters}
+            radius={100}
+            zoom={this.state.zoom}
+            locationName="The Bird"
           />
         </GoogleMapReact>
       </div>
