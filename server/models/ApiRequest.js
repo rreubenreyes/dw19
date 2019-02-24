@@ -12,7 +12,7 @@ class APIRequest {
 			return apiResult.data;
 		} catch (error) {
 			console.log(error.response.data.message);
-			return next(error);
+			throw error;
 		}
 	}
 
@@ -28,7 +28,7 @@ class APIRequest {
 			return apiResult.data;
 		} catch (error) {
 			console.log(error.response.data.message);
-			return next(error);
+			throw error;
 		}
 	}
 
@@ -62,7 +62,23 @@ class APIRequest {
 			return { id, name, fences: fenceCleanData, defaultObjects };
 		} catch (error) {
 			console.log(error.response.data.message);
-			return next(error);
+			throw error;
+		}
+	}
+
+	static async updateProjectName(projectId, name) {
+		try {
+			const apiResult = await axios({
+				url: `${API_BASE}/projects/${projectId}?key=${API_KEY}&adminKey=${ADMIN_KEY}`,
+				method: 'put',
+				data: {
+					name,
+				},
+			});
+			return apiResult.data;
+		} catch (error) {
+			console.log(error.response.data.message);
+			throw error;
 		}
 	}
 }
