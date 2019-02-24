@@ -5,6 +5,7 @@ const axios = require('axios');
 const formatFenceData = require('../helpers/formatFenceData');
 const APIRequest = require('../models/ApiRequest');
 
+console.log(process.env);
 const { API_BASE, ADMIN_KEY, API_KEY } = require('../config');
 
 /** Base Route: /projects */

@@ -1,0 +1,4 @@
+heroku config:set ADMIN_KEY=3MsIXIvIMcrt8unM57OTbO4esYEe0OpqdsJ3WAn8J59thDOq && \ 
+heroku config:set SECRET_KEY=saucesaucesuace && \ 
+heroku config:set API_KEY=pGDC9CmSnoC10swVWCY06AhYjLcJX21M && \ 
+heroku config:set GOOGLE_API_KEY=AIzaSyARXqDVFd_ybGgqRWBAdGMJyCd6hXynRxA 

@@ -18,6 +18,7 @@ if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'production') {
 
 // serve static files
 app.use(staticFiles);
+app.use('/*', staticFiles);
 
 // enable cors on all routes
 app.use(cors());
