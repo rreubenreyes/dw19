@@ -30,16 +30,6 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
 	try {
 		const { name } = req.body;
-		// const apiResult = await axios({
-		// 	url: `${API_BASE}/projects/project?key=${API_KEY}&adminKey=${ADMIN_KEY}`,
-		// 	method: 'post',
-		// 	data: {
-		// 		name,
-		// 	},
-		// });
-
-		// return res.json(apiResult.data);
-
 		const apiResponse = await APIRequest.addProject(name);
 		return res.json(apiResponse);
 	} catch (error) {
@@ -55,31 +45,8 @@ router.post('/', async (req, res, next) => {
 router.get('/:projectId', async (req, res, next) => {
 	try {
 		const { projectId } = req.params;
-
-		const apiResult = await axios({
-			url: `${API_BASE}/projects/${projectId}?key=${API_KEY}`,
-			method: 'get',
-		});
-
-		// get individual fence data and append to final json results
-		const { fences } = apiResult.data;
-		const fenceIds = fences.map(fenceObj => fenceObj.id);
-
-		// build fenceIdPromise Array
-		const fenceIdsPromises = fenceIds.map(fenceId => {
-			const apiResultPromise = axios({
-				url: `${API_BASE}/fences/${fenceId}?key=${API_KEY}`,
-				method: 'get',
-			});
-			return apiResultPromise;
-		});
-
-		// obtain fenceResult Details and parse into clean data
-		const fenceResults = await Promise.all(fenceIdsPromises);
-		const fenceCleanData = fenceResults.map(fenceData => fenceData.data);
-
-		const { id, name, defaultObjects } = apiResult.data;
-		return res.json({ id, name, fences: fenceCleanData, defaultObjects });
+		const apiResponse = await APIRequest.getProject(projectId);
+		return res.json(apiResponse);
 	} catch (error) {
 		return next(error);
 	}
