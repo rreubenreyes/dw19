@@ -7,10 +7,21 @@ import { google } from './lib';
 import { pxPerMeter, zoom } from './utils';
 
 const Circle = styled.div`
+  position: relative;
   height: ${props => `${props.radius * props.pxPerMeter}px`};
   width: ${props => `${props.radius * props.pxPerMeter}px`};
   border-radius: 50%;
   background-color: rgba(255, 0, 0, 0.25);
+
+  :after {
+    cursor: default;
+    position: absolute;
+    top: -25%;
+    left: 50%;
+    font-size: 30px;
+    background-color: white;
+    content: 'Geofence Here!!!!';
+  }
 `;
 
 class App extends Component {
