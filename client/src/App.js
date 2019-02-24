@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import GoogleMapReact from 'google-map-react';
+import ContentComponent from './ContentComponent';
 import './App.css';
 
 import { google } from './lib';
@@ -29,27 +30,28 @@ class App extends Component {
   static defaultProps = {
     defaultCenter: {
       lat: 37.787484,
-      lng: -122.396397,
+      lng: -122.396397
     },
-    defaultZoom: 15,
+    defaultZoom: 15
   };
 
   state = {
     meters: pxPerMeter(this.props.defaultCenter.lat, this.props.defaultZoom),
-    zoom: this.props.defaultZoom,
+    zoom: this.props.defaultZoom
   };
 
   onChange = ({ center, zoom, bounds, marginBounds }) => {
     const { lat } = center;
     this.setState(() => ({
       meters: pxPerMeter({ lat, zoom }),
-      zoom,
+      zoom
     }));
   };
 
   render() {
     return (
       <div style={{ height: '100vh', width: '100%' }}>
+        <ContentComponent />
         <GoogleMapReact
           bootstrapURLKeys={{ key: google.API_KEY }}
           defaultCenter={this.props.defaultCenter}
