@@ -72,6 +72,7 @@ export default class App extends Component {
           <Sidebar />
           <Map
             {...this.props}
+            userCoords={this.state.userCoords}
             setActiveFence={this.handleActiveFence}
             onChange={this.handleChange}
             zoom={this.state.zoom}

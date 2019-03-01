@@ -8,6 +8,17 @@ const uuidv4 = require('uuid/v4');
 
 const StyledContentContainer = styled.div`
   padding: 0 2em;
+  width: 100%;
+`;
+
+const StyledLi = styled.li`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledProfilePic = styled.img`
+  border-radius: 50%;
+  padding: 1em;
 `;
 
 class ContentComponent extends Component {
@@ -46,11 +57,15 @@ class ContentComponent extends Component {
 
     const comms = comments.map(comm => {
       return (
-        <li key={comm.id}>
+        <StyledLi key={comm.id}>
           <blockquote>
             <i>{comm.value}</i>
           </blockquote>
-        </li>
+          <StyledProfilePic
+            src={'http://lorempixel.com/50/50/cats/'}
+            alt={'profile'}
+          />
+        </StyledLi>
       );
     });
 

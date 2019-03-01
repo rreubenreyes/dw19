@@ -31,6 +31,28 @@ export const sampleData = {
           { id: 1, value: 'Where now brown cow?' }
         ],
         votes: 200
+      },
+      {
+        id: '5dcf61b3-af73-4912-968c-57377ef03fb3',
+        title: 'Rithm School',
+        distance: -200,
+        location: {
+          lat: 37.797292,
+          lng: -122.40118,
+          radius: 200
+        },
+        votes: 200,
+        comments: [
+          {
+            id: 0,
+            value: 'Too many dogs in this place.'
+          },
+          {
+            id: 1,
+            value: 'The hummmmans are alrite.'
+          }
+        ],
+        description: 'Rithm 9 rulz the world. and pokemon.'
       }
     ],
     outside: [
