@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import 'materialize-css/dist/css/materialize.min.css';
 
 import MapContext from './context/map-context';
 import Header from './components/Header';
@@ -19,22 +20,22 @@ export default class App extends Component {
   static defaultProps = {
     defaultCenter: {
       lat: 37.787484,
-      lng: -122.396397,
+      lng: -122.396397
     },
-    defaultZoom: 15,
+    defaultZoom: 15
   };
 
   handleChange = ({ center, zoom, bounds, marginBounds }) => {
     const { lat } = center;
     this.setState(() => ({
       pxPerMeter: pxPerMeter({ lat, zoom }),
-      zoom,
+      zoom
     }));
   };
 
   handleActiveFence = fence => {
     this.setState(() => ({
-      activeFence: fence,
+      activeFence: fence
     }));
   };
 
@@ -44,7 +45,7 @@ export default class App extends Component {
       this.props.defaultCenter.lat,
       this.props.defaultZoom
     ),
-    zoom: this.props.defaultZoom,
+    zoom: this.props.defaultZoom
   };
 
   render() {
