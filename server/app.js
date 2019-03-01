@@ -26,7 +26,6 @@ const projectRoutes = require('./routes/projects');
 
 // serer static react files
 const staticFiles = express.static(path.join(__dirname, '../client/build'));
-console.log(staticFiles);
 app.use(staticFiles);
 
 // routing Control

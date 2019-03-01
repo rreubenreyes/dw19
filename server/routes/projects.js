@@ -116,7 +116,7 @@ router.delete('/:projectId', async (req, res, next) => {
 /** POST - /projects/:projectId/report
  * @description - add a geofence to a specific project
  * @param { string } req.params.projectId - project ID
- * @param { object } req.body - see example details aboce
+ * @param { object } req.body - see example details above
  */
 router.post('/:projectId/fence', async (req, res, next) => {
 	try {
