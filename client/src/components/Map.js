@@ -11,7 +11,7 @@ const Circle = styled.div`
   height: ${props => `${props.radius * props.pxPerMeter}px`};
   width: ${props => `${props.radius * props.pxPerMeter}px`};
   border-radius: 50%;
-  background-color: rgba(255, 0, 0, 0.25);
+  background-color: ${props => props.bgcolor || `rgba(255, 0, 0, 0.25)`};
 
   :after {
     cursor: default;
@@ -26,6 +26,7 @@ top: 50%
 
 export default class Map extends Component {
   render() {
+    const { userCoords } = this.props;
     const insideFences = sampleData.fences.inside;
     return (
       <GridChild relative gridArea="map">
@@ -58,6 +59,19 @@ export default class Map extends Component {
               />
             );
           })}
+          {userCoords && (
+            <Circle
+              key={'userCoords'}
+              lat={userCoords.lat}
+              lng={userCoords.lng}
+              locationName={'User'}
+              onClick={() => {}}
+              pxPerMeter={this.props.pxPerMeter}
+              radius={'300'}
+              zoom={this.props.zoom}
+              bgcolor={'rgba(0, 0, 255, 0.25)'}
+            />
+          )}
         </GoogleMapReact>
       </GridChild>
     );
