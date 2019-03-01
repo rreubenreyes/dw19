@@ -37,8 +37,8 @@ export const sampleData = {
         title: 'Rithm School',
         distance: -200,
         location: {
-          lat: 37.797292,
-          lng: -122.40118,
+          lat: 37.79549,
+          lng: -122.401154,
           radius: 200
         },
         votes: 200,
@@ -56,21 +56,21 @@ export const sampleData = {
       }
     ],
     outside: [
-      {
-        id: 0,
-        title: 'Outside Geofence',
-        description: 'You are outside this geofence',
-        location: {
-          lat: 37.795449,
-          lng: -122.393618,
-          radius: 200
-        },
-        comments: [
-          { id: 0, value: 'outside comment' },
-          { id: 1, value: 'another outside comment' }
-        ],
-        votes: 100
-      }
+      // {
+      //   id: 0,
+      //   title: 'Outside Geofence',
+      //   description: 'You are outside this geofence',
+      //   location: {
+      //     lat: 37.795449,
+      //     lng: -122.393618,
+      //     radius: 200
+      //   },
+      //   comments: [
+      //     { id: 0, value: 'outside comment' },
+      //     { id: 1, value: 'another outside comment' }
+      //   ],
+      //   votes: 100
+      // }
     ]
   }
 };

@@ -13,21 +13,33 @@ const Circle = styled.div`
   border-radius: 50%;
   background-color: ${props => props.bgcolor || `rgba(255, 0, 0, 0.25)`};
 
+  /*
   :after {
     cursor: default;
     position: absolute;
-top: 50%
+    top: 50%
     left: 50%;
     font-size: 20px;
-    background-color: white;
+    background-color: black;
+    color: white;
     content: '${props => props.locationName}';
-  }
+  } */
 `;
 
 export default class Map extends Component {
   render() {
-    const { userCoords } = this.props;
-    const insideFences = sampleData.fences.inside;
+    const { userCoords, apiFenceData } = this.props;
+
+    // if this.props.apiFenceData is avaialble, use it, else use defaults;
+    let insideFences;
+    let outsideFences;
+    // if (apiFenceData) {
+    //   insideFences = apiFenceData.inside;
+    //   outsideFences = apiFenceData.outside;
+    // } else {
+    insideFences = sampleData.fences.inside;
+    outsideFences = sampleData.fences.outside;
+    // }
     return (
       <GridChild relative gridArea="map">
         <GoogleMapReact
@@ -59,6 +71,28 @@ export default class Map extends Component {
               />
             );
           })}
+          {outsideFences.map(fence => {
+            const {
+              id,
+              location: { lat, lng, radius },
+              title
+            } = fence;
+            return (
+              <Circle
+                key={id}
+                lat={lat}
+                lng={lng}
+                locationName={title}
+                onClick={() => {
+                  this.props.setActiveFence(fence);
+                }}
+                pxPerMeter={this.props.pxPerMeter}
+                radius={'150'}
+                zoom={this.props.zoom}
+                bgcolor={'rgba(0, 128, 0, 0.50)'}
+              />
+            );
+          })}
           {userCoords && (
             <Circle
               key={'userCoords'}
@@ -67,7 +101,7 @@ export default class Map extends Component {
               locationName={'User'}
               onClick={() => {}}
               pxPerMeter={this.props.pxPerMeter}
-              radius={'300'}
+              radius={'100'}
               zoom={this.props.zoom}
               bgcolor={'rgba(0, 0, 255, 0.25)'}
             />

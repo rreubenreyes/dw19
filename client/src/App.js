@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import 'materialize-css/dist/css/materialize.min.css';
+import axios from 'axios';
 
 import MapContext from './context/map-context';
 import Header from './components/Header';
 import Map from './components/Map';
 import Sidebar from './components/Sidebar';
 import { pxPerMeter } from './utils';
+
+import { APIReportEndpoint } from './config';
 
 const GridWrapper = styled.div`
   display: grid;
@@ -19,14 +22,25 @@ const GridWrapper = styled.div`
 export default class App extends Component {
   async componentDidMount() {
     await navigator.geolocation.getCurrentPosition(
-      pos => {
+      async pos => {
         const { latitude, longitude } = pos.coords;
+
+        const apiResult = await axios({
+          url: APIReportEndpoint,
+          method: 'post',
+          data: {
+            longitude,
+            latitude
+          }
+        });
         this.setState(state => ({
           userCoords: {
             lat: latitude,
             lng: longitude
-          }
+          },
+          apiFenceData: apiResult.data.fences
         }));
+        console.log(apiResult.data.fences);
       },
       err => console.log(err)
     );
@@ -61,7 +75,8 @@ export default class App extends Component {
       this.props.defaultZoom
     ),
     zoom: this.props.defaultZoom,
-    userCoords: null
+    userCoords: null,
+    apiFenceData: null
   };
 
   render() {
@@ -77,6 +92,7 @@ export default class App extends Component {
             onChange={this.handleChange}
             zoom={this.state.zoom}
             pxPerMeter={this.state.pxPerMeter}
+            apiFenceData={this.state.apiFenceData}
           />
         </MapContext.Provider>
       </GridWrapper>
