@@ -41,7 +41,7 @@ export default class Map extends Component {
             const {
               id,
               location: { lat, lng, radius },
-              title,
+              title
             } = fence;
             return (
               <Circle

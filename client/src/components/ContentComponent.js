@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 // import InfiniteCarousel from 'react-leaf-carousel';
 // import 'react-responsive-carousel/lib/styles/carousel.min.css';
 // import { Carousel } from 'react-responsive-carousel';
+import styled from 'styled-components';
 
 const uuidv4 = require('uuid/v4');
+
+const StyledContentContainer = styled.div`
+  padding: 0 2em;
+`;
 
 class ContentComponent extends Component {
   render() {
@@ -51,7 +56,7 @@ class ContentComponent extends Component {
 
     return (
       // <div className="content-component container card">
-      <div className="content-component">
+      <StyledContentContainer className="content-component">
         <div className="card-content">
           <h4 className="content-component title blue-text">{title}</h4>
           <div>{description}</div>
@@ -64,7 +69,7 @@ class ContentComponent extends Component {
             {votes}
           </div>
         </div>
-      </div>
+      </StyledContentContainer>
     );
   }
 

@@ -17,6 +17,21 @@ const GridWrapper = styled.div`
 `;
 
 export default class App extends Component {
+  async componentDidMount() {
+    await navigator.geolocation.getCurrentPosition(
+      pos => {
+        const { latitude, longitude } = pos.coords;
+        this.setState(state => ({
+          userCoords: {
+            lat: latitude,
+            lng: longitude
+          }
+        }));
+      },
+      err => console.log(err)
+    );
+  }
+
   static defaultProps = {
     defaultCenter: {
       lat: 37.787484,
@@ -45,14 +60,15 @@ export default class App extends Component {
       this.props.defaultCenter.lat,
       this.props.defaultZoom
     ),
-    zoom: this.props.defaultZoom
+    zoom: this.props.defaultZoom,
+    userCoords: null
   };
 
   render() {
     return (
       <GridWrapper>
         <MapContext.Provider value={{ ...this.props, ...this.state }}>
-          <Header />
+          <Header userCoords={this.state.userCoords} />
           <Sidebar />
           <Map
             {...this.props}
