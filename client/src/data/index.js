@@ -41,7 +41,7 @@ export const sampleData = {
           lng: -122.401154,
           radius: 200
         },
-        votes: 200,
+        votes: 260,
         comments: [
           {
             id: 0,
@@ -56,21 +56,21 @@ export const sampleData = {
       }
     ],
     outside: [
-      // {
-      //   id: 0,
-      //   title: 'Outside Geofence',
-      //   description: 'You are outside this geofence',
-      //   location: {
-      //     lat: 37.795449,
-      //     lng: -122.393618,
-      //     radius: 200
-      //   },
-      //   comments: [
-      //     { id: 0, value: 'outside comment' },
-      //     { id: 1, value: 'another outside comment' }
-      //   ],
-      //   votes: 100
-      // }
+      {
+        id: 0,
+        title: 'Outside Geofence',
+        description: 'You are outside this geofence',
+        location: {
+          lat: 37.795449,
+          lng: -122.393618,
+          radius: 200
+        },
+        comments: [
+          { id: 0, value: 'outside comment' },
+          { id: 1, value: 'another outside comment' }
+        ],
+        votes: 100
+      }
     ]
   }
 };

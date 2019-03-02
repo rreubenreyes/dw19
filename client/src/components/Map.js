@@ -13,7 +13,6 @@ const Circle = styled.div`
   border-radius: 50%;
   background-color: ${props => props.bgcolor || `rgba(255, 0, 0, 0.25)`};
 
-  /*
   :after {
     cursor: default;
     position: absolute;
@@ -23,7 +22,7 @@ const Circle = styled.div`
     background-color: black;
     color: white;
     content: '${props => props.locationName}';
-  } */
+  }
 `;
 
 export default class Map extends Component {
@@ -33,13 +32,13 @@ export default class Map extends Component {
     // if this.props.apiFenceData is avaialble, use it, else use defaults;
     let insideFences;
     let outsideFences;
-    // if (apiFenceData) {
-    //   insideFences = apiFenceData.inside;
-    //   outsideFences = apiFenceData.outside;
-    // } else {
-    insideFences = sampleData.fences.inside;
-    outsideFences = sampleData.fences.outside;
-    // }
+    if (apiFenceData) {
+      insideFences = apiFenceData.inside;
+      outsideFences = apiFenceData.outside;
+    } else {
+      insideFences = sampleData.fences.inside;
+      outsideFences = sampleData.fences.outside;
+    }
     return (
       <GridChild relative gridArea="map">
         <GoogleMapReact
